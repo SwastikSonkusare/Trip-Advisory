@@ -1,5 +1,8 @@
 import React from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMap, faPhone } from "@fortawesome/free-solid-svg-icons";
+
 import "./Card.scss";
 
 const Card = ({ place }) => {
@@ -51,17 +54,17 @@ const Card = ({ place }) => {
       {place?.address && (
         <div className="card__address">
           <>
-            <img className="card__address-image" alt=""></img>
-            <h4>{place.address}</h4>
+            <FontAwesomeIcon icon={faMap} size="1x" />
+            <h5>{place.address}</h5>
           </>
         </div>
       )}
 
       {place.phone && (
-        <div className="card__phone">
+        <div className="card__address">
           <>
-            <img className="card__address-image"></img>
-            <h4>{place.phone}</h4>
+            <FontAwesomeIcon icon={faPhone} size="1x" />
+            <h5>{place.phone}</h5>
           </>
         </div>
       )}

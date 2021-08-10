@@ -12,6 +12,7 @@ const App = () => {
   const [bounds, setBounds] = useState(null);
   const [type, setType] = useState("hotels");
   const [places, setPlaces] = useState([]);
+  const [filteredPlaces, setFilteredPlaces] = useState([]);
   const [rating, setRating] = useState("");
 
   const onLoad = (autoC) => setAutocomplete(autoC);
@@ -25,8 +26,10 @@ const App = () => {
 
   useEffect(() => {
     if (bounds) {
-      getPlacesData(bounds.ne, bounds.sw).then((data) => {
+      getPlacesData(bounds.ne, bounds.sw, type).then((data) => {
         setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
+        setFilteredPlaces([]);
+        setRating("");
       });
     }
   }, [bounds, type]);
@@ -42,17 +45,28 @@ const App = () => {
     );
   }, []);
 
+  useEffect(() => {
+    const filtered = places.filter((place) => Number(place.rating) > rating);
+
+    setFilteredPlaces(filtered);
+  }, [rating]);
+
   return (
     <div>
       <Header onLoad={onLoad} onPlaceChanged={onPlaceChanged} />
 
       <div className="container">
-        <PlaceList places={places} />
+        <PlaceList
+          places={filteredPlaces.length ? filteredPlaces : places}
+          setType={setType}
+          setRating={setRating}
+        />
 
         <MapSection
           coords={coords}
           setBounds={setBounds}
           setCoords={setCoords}
+          places={filteredPlaces.length ? filteredPlaces : places}
         />
       </div>
     </div>

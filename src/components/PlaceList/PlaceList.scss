@@ -1,8 +1,25 @@
 .list {
-  width: 30%;
+  width: 40%;
 
   &__card-container {
     height: 100vh;
     overflow-y: scroll;
+  }
+
+  &__header {
+    text-align: center;
+    color: #171010;
+  }
+
+  &__dropdowns {
+    margin-block: 1.2rem;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &:focus {
+      outline: none;
+    }
   }
 }

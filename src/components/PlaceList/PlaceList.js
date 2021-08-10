@@ -4,18 +4,25 @@ import Card from "../Card/Card";
 
 import "./PlaceList.scss";
 
-const PlaceList = ({ places }) => {
+const PlaceList = ({ places, setType, setRating }) => {
   return (
     <div className="list">
       <h1 className="list__header">Hotels and Restuarents around you.</h1>
-      <small>Type</small>
       <div className="list__dropdowns">
-        <select name="hotels" id="hotels">
+        <select
+          name="hotels"
+          id="hotels"
+          onChange={(e) => setType(e.target.value)}
+        >
           <option value="hotels">Hotels</option>
-          <option value="restuarents">Restuarents</option>
+          <option value="restaurents">Restaurents</option>
           <option value="attractions">Attractions</option>
         </select>
-        <select name="rating" id="rating">
+        <select
+          name="rating"
+          id="rating"
+          onChange={(e) => setRating(Number(e.target.value))}
+        >
           <option value="">All</option>
           <option value="3">Above 3.0</option>
           <option value="4">Above 4.0</option>
