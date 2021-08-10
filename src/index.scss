@@ -17,8 +17,10 @@ html {
 body {
   min-height: 100vh;
   box-sizing: border-box;
+  overflow-y: hidden;
 }
 
 .container {
   display: flex;
+  grid-gap: 2.5rem;
 }

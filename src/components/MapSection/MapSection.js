@@ -3,14 +3,10 @@ import GoogleMapReact from "google-map-react";
 
 import "./MapSection.scss";
 
-const MapSection = ({ coords }) => {
+const MapSection = ({ coords, setCoords, setBounds }) => {
   const center = {
     lat: coords.lat,
     lng: coords.lng,
-  };
-
-  const onChange = (e) => {
-    console.log(e);
   };
 
   return (
@@ -19,7 +15,10 @@ const MapSection = ({ coords }) => {
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
         defaultZoom={8}
         center={center}
-        onChange={onChange}
+        onChange={(e) => {
+          setCoords({ lat: e.center.lat, lng: e.center.lng });
+          setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+        }}
       ></GoogleMapReact>
     </div>
   );
