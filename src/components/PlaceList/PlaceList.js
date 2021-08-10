@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect, createRef, useState } from "react";
 
 import Card from "../Card/Card";
 
 import "./PlaceList.scss";
 
-const PlaceList = ({ places, setType, setRating }) => {
+const PlaceList = ({ places, setType, setRating, childClicked }) => {
+  const [elRefs, setElRefs] = useState([]);
+
+  useEffect(() => {
+    setElRefs((refs) =>
+      Array(places?.length)
+        .fill()
+        .map((_, i) => refs[i] || createRef())
+    );
+
+    console.log(elRefs);
+  }, [places]);
+
   return (
     <div className="list">
       <h1 className="list__header">Hotels and Restuarents around you.</h1>
@@ -15,7 +27,7 @@ const PlaceList = ({ places, setType, setRating }) => {
           onChange={(e) => setType(e.target.value)}
         >
           <option value="hotels">Hotels</option>
-          <option value="restaurents">Restaurents</option>
+          <option value="restaurants">Restaurants</option>
           <option value="attractions">Attractions</option>
         </select>
         <select
@@ -31,7 +43,15 @@ const PlaceList = ({ places, setType, setRating }) => {
       </div>
 
       <div className="list__card-container">
-        {places.length && places.map((place) => <Card place={place} />)}
+        {places.length &&
+          places.map((place, i) => (
+            <Card
+              place={place}
+              key={i}
+              selected={Number(childClicked) === i}
+              refProp={elRefs[i]}
+            />
+          ))}
       </div>
     </div>
   );

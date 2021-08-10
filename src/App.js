@@ -14,6 +14,7 @@ const App = () => {
   const [places, setPlaces] = useState([]);
   const [filteredPlaces, setFilteredPlaces] = useState([]);
   const [rating, setRating] = useState("");
+  const [childClicked, setChildClicked] = useState(null);
 
   const onLoad = (autoC) => setAutocomplete(autoC);
 
@@ -45,6 +46,7 @@ const App = () => {
     );
   }, []);
 
+
   useEffect(() => {
     const filtered = places.filter((place) => Number(place.rating) > rating);
 
@@ -60,6 +62,7 @@ const App = () => {
           places={filteredPlaces.length ? filteredPlaces : places}
           setType={setType}
           setRating={setRating}
+          childClicked={childClicked}
         />
 
         <MapSection
@@ -67,6 +70,7 @@ const App = () => {
           setBounds={setBounds}
           setCoords={setCoords}
           places={filteredPlaces.length ? filteredPlaces : places}
+          setChildClicked={setChildClicked}
         />
       </div>
     </div>

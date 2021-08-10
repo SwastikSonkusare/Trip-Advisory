@@ -5,12 +5,22 @@ import { faMap, faPhone } from "@fortawesome/free-solid-svg-icons";
 
 import "./Card.scss";
 
-const Card = ({ place }) => {
+const Card = ({ place, selected, refProp }) => {
+  if (selected) {
+    refProp?.current?.scrollIntoView({ behaviour: "smooth", block: "start" });
+  }
+
+  console.log(refProp);
+
   return (
     <div className="card">
       <img
         className="card__image"
-        src={place.photo.images.large.url}
+        src={
+          place.photo
+            ? place.photo.images.large.url
+            : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"
+        }
         alt=""
       ></img>
 
