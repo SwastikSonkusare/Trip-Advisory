@@ -10,7 +10,6 @@ const Card = ({ place, selected, refProp }) => {
     refProp?.current?.scrollIntoView({ behaviour: "smooth", block: "start" });
   }
 
-  console.log(refProp);
 
   return (
     <div className="card">
